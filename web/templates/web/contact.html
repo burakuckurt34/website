@@ -1,0 +1,25 @@
+{% extends "web/base.html" %}
+
+{% block title %}İletişim{% endblock %}
+
+{% block content %}
+  <h1 style="margin-top:0;">İletişim</h1>
+
+  <p style="line-height:1.6;">
+    Benimle aşağıdaki kanallardan iletişime geçebilirsin. Mesajına en kısa sürede dönüş yaparım.
+  </p>
+
+  <div style="margin-top:14px; line-height:1.9;">
+    <div><b>E-posta:</b> <span style="color:#555;">(buraya e-posta adresini yaz)</span></div>
+    <div><b>LinkedIn:</b> <span style="color:#555;">(buraya profil linkini yaz)</span></div>
+    <div><b>GitHub:</b> <span style="color:#555;">(buraya profil linkini yaz)</span></div>
+  </div>
+
+  <div style="margin-top:16px; padding:12px; border:1px solid #e6e6e6; border-radius:10px; background:#fafafa;">
+    <b>Not</b>
+    <div style="color:#555; margin-top:6px; line-height:1.6;">
+      İstersen bir sonraki adımda bu sayfaya basit bir “iletişim formu” ekleyebiliriz.
+      (Formu güvenli şekilde e-posta gönderimine bağlamak için ekstra ayar yaparız.)
+    </div>
+  </div>
+{% endblock %}

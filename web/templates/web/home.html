@@ -1,0 +1,100 @@
+{% extends "web/base.html" %}
+
+{% block title %}Anasayfa{% endblock %}
+
+{% block hero_title %}Merhaba, ben Burak Can Üçkurt{% endblock %}
+{% block hero_subtitle %}Junior Python Developer • AI Integrations • Django{% endblock %}
+
+{% block content %}
+
+  <div style="display:grid; grid-template-columns: 1.2fr 0.8fr; gap:14px;">
+    <!-- Sol: Kısa tanıtım -->
+    <div style="padding:16px; border:1px solid rgba(255,255,255,0.14); border-radius:16px; background: rgba(255,255,255,0.06);">
+      <h2 style="margin:0 0 8px 0; font-size:20px;">Kısa Tanıtım</h2>
+      <p style="margin:0; color: rgba(255,255,255,0.75); line-height:1.7;">
+        Eyüboğlu Fen ve Teknoloji Lisesi öğrencisiyim. Python ile web uygulamaları geliştiriyor
+        ve yapay zekâ entegrasyonları üzerinde çalışıyorum. Amacım; basit, anlaşılır ve
+        güvenilir çözümler üretmek.
+      </p>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+        <a href="{% url 'projects' %}" style="display:inline-block; padding:10px 14px; border-radius:14px; border:1px solid rgba(255,255,255,0.18); background: linear-gradient(135deg, rgba(88,101,242,0.85), rgba(34,211,238,0.45)); color: rgba(255,255,255,0.95);">
+          Projelerimi Gör
+        </a>
+        <a href="{% url 'contact' %}" style="display:inline-block; padding:10px 14px; border-radius:14px; border:1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.90);">
+          İletişim
+        </a>
+      </div>
+    </div>
+
+    <!-- Sağ: Hızlı bilgiler -->
+    <div style="padding:16px; border:1px solid rgba(255,255,255,0.14); border-radius:16px; background: rgba(255,255,255,0.06);">
+      <h2 style="margin:0 0 10px 0; font-size:20px;">Hızlı Bilgiler</h2>
+
+      <div style="display:grid; gap:10px;">
+        <div style="padding:12px; border-radius:14px; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);">
+          <div style="font-size:12px; color: rgba(255,255,255,0.65);">Rol</div>
+          <div style="margin-top:4px;">Junior Python Developer</div>
+        </div>
+
+        <div style="padding:12px; border-radius:14px; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);">
+          <div style="font-size:12px; color: rgba(255,255,255,0.65);">Odak</div>
+          <div style="margin-top:4px;">AI Integrations • Web Development</div>
+        </div>
+
+        <div style="padding:12px; border-radius:14px; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);">
+          <div style="font-size:12px; color: rgba(255,255,255,0.65);">Teknolojiler</div>
+          <div style="margin-top:6px; display:flex; flex-wrap:wrap; gap:8px;">
+            <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.06); font-size:12px; color: rgba(255,255,255,0.80);">Python</span>
+            <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.06); font-size:12px; color: rgba(255,255,255,0.80);">Django</span>
+            <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.06); font-size:12px; color: rgba(255,255,255,0.80);">REST / API</span>
+            <span style="padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.06); font-size:12px; color: rgba(255,255,255,0.80);">LLM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alt bölüm: Odak alanları -->
+  <div style="margin-top:14px; padding:16px; border:1px solid rgba(255,255,255,0.14); border-radius:16px; background: rgba(255,255,255,0.06);">
+    <h2 style="margin:0 0 10px 0; font-size:20px;">Neler Yapıyorum?</h2>
+
+    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:12px;">
+      <div style="padding:14px; border-radius:14px; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);">
+        <b>Web Uygulamaları</b>
+        <div style="margin-top:6px; color: rgba(255,255,255,0.72); line-height:1.6;">
+          Django ile sade, hızlı ve yönetilebilir web uygulamaları geliştiriyorum.
+        </div>
+      </div>
+
+      <div style="padding:14px; border-radius:14px; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);">
+        <b>AI Integrations</b>
+        <div style="margin-top:6px; color: rgba(255,255,255,0.72); line-height:1.6;">
+          API entegrasyonları ve LLM tabanlı senaryolarla yapay zekâyı ürünlere entegre ediyorum.
+        </div>
+      </div>
+
+      <div style="padding:14px; border-radius:14px; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);">
+        <b>Otomasyon</b>
+        <div style="margin-top:6px; color: rgba(255,255,255,0.72); line-height:1.6;">
+          Python ile veri işleme ve tekrarlı işleri otomatikleştiren küçük araçlar geliştiriyorum.
+        </div>
+      </div>
+
+      <div style="padding:14px; border-radius:14px; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);">
+        <b>REST / HTTP</b>
+        <div style="margin-top:6px; color: rgba(255,255,255,0.72); line-height:1.6;">
+          Servis tasarımı, istek/yanıt akışları ve entegrasyon mantıkları üzerinde çalışıyorum.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @media (max-width: 860px){
+      .content > div:first-child{ grid-template-columns: 1fr !important; }
+      .content div[style*="grid-template-columns: repeat(2, 1fr)"]{ grid-template-columns: 1fr !important; }
+    }
+  </style>
+
+{% endblock %}

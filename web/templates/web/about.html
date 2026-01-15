@@ -1,0 +1,37 @@
+{% extends "web/base.html" %}
+
+{% block title %}Hakkımda{% endblock %}
+
+{% block content %}
+  <h1 style="margin-top:0;">Hakkımda</h1>
+
+  <p style="line-height:1.7;">
+    Eyüboğlu Fen ve Teknoloji Lisesi öğrencisiyim. Junior Python Developer olarak yazılım geliştirme
+    ve AI Integrations alanlarına odaklanıyorum. Amacım; kullanıcı ihtiyacını doğru anlayıp
+    temiz, anlaşılır ve sürdürülebilir çözümler üretmek.
+  </p>
+
+  <h3 style="margin:18px 0 8px 0;">İlgi ve Odak Alanlarım</h3>
+  <ul style="margin:0 0 0 18px; line-height:1.8;">
+    <li>Python ile uygulama geliştirme</li>
+    <li>Django ile web uygulamaları</li>
+    <li>AI Integrations (API entegrasyonları, LLM tabanlı kullanım senaryoları)</li>
+    <li>HTTP/REST, veri işleme ve temel otomasyon ihtiyaçları</li>
+  </ul>
+
+  <h3 style="margin:18px 0 8px 0;">Çalışma Yaklaşımım</h3>
+  <ul style="margin:0 0 0 18px; line-height:1.8;">
+    <li>Önce hedefi netleştirir, sonra en basit sağlam çözümü kurarım</li>
+    <li>Okunabilirlik ve bakım kolaylığına önem veririm</li>
+    <li>Hata yönetimi ve loglamayı baştan düşünürüm</li>
+  </ul>
+
+  <div style="margin-top:16px;">
+    <a href="{% url 'projects' %}" style="display:inline-block; padding:10px 14px; border:1px solid #222; border-radius:10px; text-decoration:none; color:#222;">
+      Projelere Git
+    </a>
+    <a href="{% url 'contact' %}" style="display:inline-block; padding:10px 14px; border:1px solid #e6e6e6; border-radius:10px; text-decoration:none; color:#222; margin-left:10px;">
+      İletişim
+    </a>
+  </div>
+{% endblock %}
