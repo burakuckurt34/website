@@ -27,22 +27,20 @@ SECRET_KEY = os.environ.get(
 # DEBUG: Render'da DEBUG=0 ver.
 DEBUG = os.environ.get("DEBUG", "1").lower() in ("1", "true", "yes", "on")
 
-# Render dış hostname (ör: website-otz8.onrender.com) otomatik alsın
+# Render dış hostname (ör: website-xxxxx.onrender.com) otomatik alsın
 render_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME", "").strip()
 
 ALLOWED_HOSTS = [
     ".ngrok-free.dev",
     "127.0.0.1",
     "localhost",
+
+    # Render: tüm onrender subdomainlerini kabul et (en sağlam çözüm)
+    ".onrender.com",
 ]
 
 if render_hostname:
     ALLOWED_HOSTS.append(render_hostname)
-    # İstersen subdomain wildcard da ekleyebilirsin:
-    ALLOWED_HOSTS.append(f".{render_hostname}")
-
-# Render domainini direkt ekleyelim (env gelmezse bile çalışsın diye)
-ALLOWED_HOSTS.append("website-otz8.onrender.com")
 
 # CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
@@ -51,8 +49,8 @@ CSRF_TRUSTED_ORIGINS = [
 if render_hostname:
     CSRF_TRUSTED_ORIGINS.append(f"https://{render_hostname}")
     CSRF_TRUSTED_ORIGINS.append(f"https://*.{render_hostname}")
-# Sabit domain (env gelmezse bile)
-CSRF_TRUSTED_ORIGINS.append("https://website-otz8.onrender.com")
+# Render domainleri için (genel)
+CSRF_TRUSTED_ORIGINS.append("https://*.onrender.com")
 
 
 # Application definition
@@ -134,5 +132,6 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/chat/"
+
 
 
