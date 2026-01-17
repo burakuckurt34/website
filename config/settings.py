@@ -10,20 +10,25 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
+# --- Security / Production basics ---
+# SECRET_KEY: Render'da environment variable olarak ver (SECRET_KEY).
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "django-insecure-awlt760l6qdmlvhapacg#+i!z$oait#%)83)esf=ceh)ub70zi",
+)
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-awlt760l6qdmlvhapacg#+i!z$oait#%)83)esf=ceh)ub70zi'
+# DEBUG: Render'da DEBUG=0 ver.
+DEBUG = os.environ.get("DEBUG", "1").lower() in ("1", "true", "yes", "on")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Render dış hostname (ör: website-otz8.onrender.com) otomatik alsın
+render_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME", "").strip()
 
 ALLOWED_HOSTS = [
     ".ngrok-free.dev",
@@ -31,12 +36,26 @@ ALLOWED_HOSTS = [
     "localhost",
 ]
 
+if render_hostname:
+    ALLOWED_HOSTS.append(render_hostname)
+    # İstersen subdomain wildcard da ekleyebilirsin:
+    ALLOWED_HOSTS.append(f".{render_hostname}")
+
+# Render domainini direkt ekleyelim (env gelmezse bile çalışsın diye)
+ALLOWED_HOSTS.append("website-otz8.onrender.com")
+
+# CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
     "https://*.ngrok-free.dev",
 ]
+if render_hostname:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{render_hostname}")
+    CSRF_TRUSTED_ORIGINS.append(f"https://*.{render_hostname}")
+# Sabit domain (env gelmezse bile)
+CSRF_TRUSTED_ORIGINS.append("https://website-otz8.onrender.com")
+
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,6 +68,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    # WhiteNoise: static dosyaları Render'da düzgün servis eder
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -78,8 +101,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -89,40 +110,29 @@ DATABASES = {
 
 
 # Password validation
-# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/6.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
-
+# Static files
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# WhiteNoise storage: collectstatic sonrası hashed dosya isimleri
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/chat/"
+
 
